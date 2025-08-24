@@ -3,8 +3,8 @@ export default function (request, response) {
     const number = parseInt(x);
 
     // 숫자가 아니거나 유효하지 않은 범위일 경우
-    if (isNaN(number) || number < 1 || number > 9) {
-        response.status(400).json({ error: '1 ~ 9 사이의 유효한 숫자를 입력해야 합니다.' });
+    if (isNaN(number)) {
+        response.status(400).json({ error: '유효한 숫자를 입력해야 합니다.' });
         return;
     }
 

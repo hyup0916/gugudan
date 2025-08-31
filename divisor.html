@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>구구단 계산기</title>
+    <title>약수 계산기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="nav-bar">
-        <a href="/" class="nav-link active">구구단</a>
-        <a href="/divisor" class="nav-link">약수 계산</a>
+        <a href="/" class="nav-link">구구단</a>
+        <a href="/divisor" class="nav-link active">약수 계산</a>
     </nav>
     
     <div class="container">
-        <h1>구구단 계산기</h1>
+        <h1>약수 계산기</h1>
         <p>숫자를 입력하고 '계산하기' 버튼을 누르세요.</p>
         <div class="input-group">
-            <input type="number" id="numberInput" placeholder="1 ~ 9 사이의 숫자">
+            <input type="number" id="numberInput" placeholder="1 이상의 정수" min="1">
             <button id="calculateBtn">계산하기</button>
         </div>
         <div id="result"></div>
@@ -28,24 +28,41 @@
         const resultDiv = document.getElementById('result');
 
         calculateBtn.addEventListener('click', async () => {
-            const number = numberInput.value;
-            if (!number) {
-                alert('유효한 숫자를 입력해주세요.');
+            const number = parseInt(numberInput.value);
+            if (!number || number < 1) {
+                alert('1 이상의 정수를 입력해주세요.');
                 return;
             }
 
+            // 로딩 표시
+            resultDiv.innerHTML = '<p>계산 중...</p>';
+
             // Vercel 서버리스 함수 호출
             try {
-                const response = await fetch(`/api/gugudan?x=${number}`);
+                const response = await fetch(`/api/divisor?number=${number}`);
                 if (!response.ok) {
                     throw new Error('서버 오류 발생');
                 }
                 const data = await response.json();
 
                 // 결과 화면에 표시
-                resultDiv.innerHTML = `<h2>${number}단</h2>` + data.result.map(item => `<p>${item}</p>`).join('');
+                const divisorsDisplay = data.divisors.join(', ');
+                resultDiv.innerHTML = `
+                    <div class="result-content">
+                        <h2>${number}의 약수</h2>
+                        <p class="divisors">${divisorsDisplay}</p>
+                        <p class="count">총 ${data.count}개</p>
+                    </div>
+                `;
             } catch (error) {
                 resultDiv.innerHTML = `<p class="error">${error.message}</p>`;
+            }
+        });
+
+        // 엔터키 이벤트 추가
+        numberInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                calculateBtn.click();
             }
         });
     </script>

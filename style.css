@@ -1,67 +1,84 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+/* 기존 스타일에 추가할 CSS */
 
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* 네비게이션 바 */
+.nav-bar {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    margin-bottom: 2rem;
     text-align: center;
-    width: 350px;
-}
-
-h1 {
-    color: #333;
-}
-
-.input-group {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-#numberInput {
-    padding: 10px;
-    border: 1px solid #ccc;
+    border-bottom: 2px solid #e9ecef;
+  }
+  
+  .nav-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: #6c757d;
     border-radius: 5px;
-    width: 60%;
-    margin-right: 10px;
-}
-
-#calculateBtn {
-    padding: 10px 20px;
-    border: none;
-    background-color: #0070f3;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .nav-link:hover {
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  
+  .nav-link.active {
+    background-color: #007bff;
     color: white;
+  }
+  
+  /* 약수 결과 스타일 */
+  .result-content {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .result-content h2 {
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+  
+  .divisors {
+    font-size: 1.1rem;
+    color: #333;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    margin: 1rem 0;
+    word-wrap: break-word;
+    line-height: 1.5;
+  }
+  
+  .count {
+    font-weight: bold;
+    color: #28a745;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+  }
+  
+  /* 오류 메시지 */
+  .error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 0.75rem;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#calculateBtn:hover {
-    background-color: #005bb5;
-}
-
-#result {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px dashed #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    text-align: left;
-}
-
-#result p {
-    margin: 5px 0;
-}
-
-.error {
-    color: red;
-}
+    text-align: center;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .nav-link {
+      display: block;
+      margin: 0.25rem 0;
+    }
+    
+    .divisors {
+      font-size: 1rem;
+      padding: 0.75rem;
+    }
+  }
